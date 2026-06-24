@@ -11,7 +11,7 @@ import Browse from "./pages/browse"
 import ApplyProposal from "./pages/applygig"
 import ProposalSuccess from "./pages/proposalsubmit"
 import Applicants from "./pages/applicants"
-import EditGig from "./pages/editGig"
+import EditGig from "./pages/editgig"
 import ProtectedRoute from "./components/protectedroutes"
 import ForgetPassword from "./pages/ForgetPassword"
 
