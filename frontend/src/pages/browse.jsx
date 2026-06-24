@@ -37,7 +37,9 @@ const filteredGigs = gigs.filter(
 
 
 (gig) =>
+  gig.status === "Open" &&
 
+(
   gig.title
     .toLowerCase()
     .includes(search.toLowerCase()) ||
@@ -46,7 +48,7 @@ const filteredGigs = gigs.filter(
     .toLowerCase()
     .includes(search.toLowerCase())
 
-
+)
 )
 
 return (

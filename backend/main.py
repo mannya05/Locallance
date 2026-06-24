@@ -18,6 +18,16 @@ from schemas import (
     UserCreate,
     UserLogin
 )
+from openai import OpenAI
+import json
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+client = OpenAI(
+    api_key=os.getenv("OPEN_ROUTER_KEY"),
+    base_url="https://openrouter.ai/api/v1"
+)
 
 app = FastAPI()
 
@@ -234,29 +244,46 @@ def update_application_status(
 
     # If applicant is accepted
     if status == "Accepted":
+        already_selected = db.query(Application).filter(
+        Application.gig_id == application.gig_id,
+        Application.status == "Accepted",
+        Application.id != application_id
+        ).first()
+        
+        if already_selected:
+
+            db.close()
+
+            return {
+            "message": "An applicant has already been selected for this gig."
+            }
+
+        application.feedback = (
+        feedback
+        if feedback
+        else "Congratulations! Your proposal has been accepted. You can now contact the client using the details provided in your dashboard."
+            )
 
         gig = db.query(Gig).filter(
-            Gig.id == application.gig_id
+        Gig.id == application.gig_id
         ).first()
 
         if gig:
             gig.status = "In Progress"
 
-        # Reject all other pending applicants
         other_apps = db.query(Application).filter(
-            Application.gig_id == application.gig_id,
-            Application.id != application_id
+        Application.gig_id == application.gig_id,
+        Application.id != application_id
         ).all()
 
         for app in other_apps:
 
-            if app.status == "Pending":
+            app.status = "Rejected"
 
-                app.status = "Rejected"
-                app.feedback = (
-                    "Another applicant was selected."
-                )
-
+            app.feedback = (
+            "Thank you for applying. Another applicant was selected for this project. We appreciate your interest and encourage you to apply for future opportunities."
+            )
+                
     db.commit()
     db.refresh(application)
 
@@ -397,3 +424,54 @@ def get_users():
 
     return users
 
+
+@app.post("/ai/rank-applicants")
+def rank_applicants(data: dict):
+
+    gig_description = data.get("gig_description", "")
+    applicants = data.get("applicants", [])
+
+    if not applicants:
+        return {"ranked": []}
+
+    prompt = f"""
+    You are a hiring assistant for a college freelance marketplace.
+
+    Gig Description:
+    {gig_description}
+
+    Applicants:
+    {json.dumps(applicants, indent=2)}
+
+    Score each applicant from 0-100 based on:
+    1. How relevant their proposal is to the gig (40%)
+    2. Clarity and professionalism of proposal (40%)
+    3. Reasonable pricing for the work (20%)
+
+    Return ONLY a valid JSON array, nothing else, no backticks:
+    [
+      {{"id": 1, "score": 85, "reason": "one line reason"}},
+      {{"id": 2, "score": 72, "reason": "one line reason"}}
+    ]
+
+    Sort by score descending.
+    """
+
+    response = client.chat.completions.create(
+    model="deepseek/deepseek-chat-v3-0324",
+    messages=[
+        {
+            "role": "user",
+            "content": prompt
+        }
+    ]
+)
+
+    raw = response.choices[0].message.content
+    raw = raw.replace("```json", "")
+    raw = raw.replace("```", "")
+    raw = raw.strip()
+
+    ranked = json.loads(raw)
+
+    return {"ranked": ranked}

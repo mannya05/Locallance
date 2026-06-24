@@ -36,7 +36,7 @@ export default function ForgotPassword() {
 
       console.error(error)
 
-      toast.success("Failed to reset password")
+      toast.error("Failed to reset password")
 
     }
 

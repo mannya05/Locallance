@@ -410,16 +410,15 @@ console.log("Applications State:", applications)
         </div>
 
       </div>
-
+      
     )
   })
 
   )}
 
-      </div>
-
     </div>
-              {/* Recent Activity */}
+
+{/* Recent Activity */}
 
               <div className="mt-16">
 
@@ -462,6 +461,8 @@ console.log("Applications State:", applications)
                 </div>
 
               </div>
+              
+    </div>
 
     </div>
 

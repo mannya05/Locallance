@@ -15,6 +15,15 @@ export default function EditGig() {
   const [category, setCategory] = useState("")
   const [budget, setBudget] = useState("")
   const [status, setStatus] = useState("Open")
+  const categories = [
+  "Web Development",
+  "App Development",
+  "Graphic Design",
+  "AI/ML",
+  "Content Writing",
+  "Video Editing",
+  "UI/UX Design"
+]
 
   useEffect(() => {
 
