@@ -1,5 +1,6 @@
 import Navbar from "../components/navbar"
 import { useNavigate } from "react-router-dom"
+import toast from "react-hot-toast"
 import { useEffect, useState } from "react"
 import API from "../api/api"
 
@@ -71,7 +72,7 @@ const fetchUsers = async () => {
         gigs.filter((gig) => gig.id !== id)
       )
 
-      alert("Gig deleted successfully!")
+      toast.success("Gig deleted successfully!")
 
     } catch (error) {
 
@@ -111,7 +112,7 @@ console.log("Applications State:", applications)
         </div>
 
         {/* Stats */}
-        <div className="grid md:grid-cols-3 gap-6 mb-14">
+        <div className="grid md:grid-cols-4 gap-6 mb-14">
 
           <div className="bg-gray-900 border border-gray-800 rounded-3xl p-6">
 
@@ -148,10 +149,33 @@ console.log("Applications State:", applications)
             </h3>
 
             <p className="text-4xl font-bold text-green-400 mt-3">
-              0
+              {
+                 gigs.filter(
+                    (gig) =>
+                      gig.user === user.name &&
+                      gig.status === "Completed"
+                  ).length
+              }
             </p>
 
           </div>
+          <div className="bg-gray-900 border border-gray-800 rounded-3xl p-6">
+
+              <h3 className="text-gray-400">
+                Active Gigs
+              </h3>
+
+              <p className="text-4xl font-bold text-green-400 mt-3">
+                {
+                  gigs.filter(
+                    (gig) =>
+                      gig.user === user.name &&
+                      gig.status !== "Completed"
+                  ).length
+                }
+              </p>
+
+            </div>
 
         </div>
 
@@ -160,13 +184,30 @@ console.log("Applications State:", applications)
           My Posted Gigs
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-6 mb-14">
+       <div className="grid md:grid-cols-2 gap-6 mb-14">
+        {gigs.filter(
+        (gig) => gig.user === user.name
+        ).length === 0 ? (
 
-          {gigs
-            .filter(
-              (gig) => gig.user === user.name
-            )
-            .map((gig) => (
+        <div className="bg-gray-900 border border-gray-800 rounded-3xl p-8 text-center">
+
+          <h3 className="text-2xl font-bold mb-3">
+            No Gigs Posted Yet !
+          </h3>
+
+          <p className="text-gray-400">
+            Post your first gig and start hiring talent.
+          </p>
+
+          </div>
+
+          ) : (
+
+            gigs
+              .filter(
+                (gig) => gig.user === user.name
+              )
+              .map((gig) => (
 
               <div
                 key={gig.id}
@@ -189,9 +230,29 @@ console.log("Applications State:", applications)
                   Posted By: {gig.user}
                 </p>
 
-                <p className="text-green-400 mt-1">
-                    Status: {gig.status}
-                </p>
+               <div className="mt-2">
+
+  <span
+    className={`
+      px-3 py-1 rounded-full text-sm font-bold
+
+      ${gig.status === "Open"
+        ? "bg-green-500 text-black"
+        : ""}
+
+      ${gig.status === "In Progress"
+        ? "bg-yellow-500 text-black"
+        : ""}
+
+      ${gig.status === "Completed"
+        ? "bg-blue-500 text-white"
+        : ""}
+    `}
+  >
+    {gig.status}
+  </span>
+
+</div>
 
                 <div className="flex gap-3 mt-5 flex-wrap">
 
@@ -244,8 +305,9 @@ console.log("Applications State:", applications)
                 </div>
 
               </div>
+              ))
 
-            ))}
+            )}
 
         </div>
 
@@ -256,7 +318,23 @@ console.log("Applications State:", applications)
 
 <div className="grid md:grid-cols-2 gap-6">
 
-  {applications.map((app) => {
+  {applications.length === 0 ? (
+
+    <div className="bg-gray-900 border border-gray-800 rounded-3xl p-8 text-center">
+
+      <h3 className="text-2xl font-bold mb-3">
+        No Applications Yet 📄
+      </h3>
+
+      <p className="text-gray-400">
+        Browse gigs and start applying.
+      </p>
+
+    </div>
+
+  ) : (
+
+    applications.map((app) => {
 
     const gigOwner = gigs.find(
       (gig) => gig.id === app.gig_id
@@ -334,12 +412,56 @@ console.log("Applications State:", applications)
       </div>
 
     )
+  })
 
-  })}
-
-</div>
+  )}
 
       </div>
+
+    </div>
+              {/* Recent Activity */}
+
+              <div className="mt-16">
+
+                <h2 className="text-3xl font-bold mb-6">
+                  Recent Activity
+                </h2>
+
+                <div className="bg-gray-900 border border-gray-800 rounded-3xl p-6">
+
+                  <ul className="space-y-4 text-gray-300">
+
+                    <li>
+                       Welcome to LocalLance!
+                    </li>
+
+                    <li>
+                      📄 Applications Sent: {applications.length}
+                    </li>
+
+                    <li>
+                      💼 Gigs Posted: {
+                        gigs.filter(
+                          (gig) => gig.user === user.name
+                        ).length
+                      }
+                    </li>
+
+                    <li>
+                      🔥 Active Gigs: {
+                        gigs.filter(
+                          (gig) =>
+                            gig.user === user.name &&
+                            gig.status !== "Completed"
+                        ).length
+                      }
+                    </li>
+
+                  </ul>
+
+                </div>
+
+              </div>
 
     </div>
 

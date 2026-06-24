@@ -8,10 +8,20 @@ import API from "../api/api"
 const heading = "Campus Freelancing Made Simple".split(" ")
 
 const categories = [
-  "Design",
-  "Development",
+  "Web Development",
+  "Mobile App Development",
+  "UI/UX Design",
+  "Graphic Design",
   "Video Editing",
+  "Content Writing",
+  "Digital Marketing",
+  "Data Science",
+  "AI / Machine Learning",
   "Tutoring",
+  "Photography",
+  "Event Management",
+  "Presentation Design",
+  "Resume Building"
 ]
 
 
@@ -171,9 +181,19 @@ export default function Home() {
         </div>
 
       </section>
-          <footer className="border-t border-gray-800 py-8 text-center text-gray-500">
+         <footer className="border-t border-gray-800 py-8 text-center text-gray-500">
 
-  © 2026 LocalLance • Built by Mannya
+  <h3 className="text-lg font-bold text-green-400 mb-2">
+    LocalLance
+  </h3>
+
+  <p>
+    Connecting campus talent with opportunities 
+  </p>
+
+  <p className="mt-2 text-sm">
+    © 2026 LocalLance • Built by Mannya
+  </p>
 
 </footer>
 

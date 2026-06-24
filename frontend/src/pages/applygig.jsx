@@ -1,5 +1,6 @@
 import Navbar from "../components/navbar"
 import { Link, useParams, useNavigate } from "react-router-dom"
+import toast from "react-hot-toast"
 import { useState } from "react"
 import API from "../api/api"
 
@@ -38,7 +39,7 @@ export default function ApplyProposal() {
         "Already applied"
       ) {
 
-        alert(
+        toast.success(
           "You have already applied for this gig!"
         )
 
@@ -46,7 +47,7 @@ export default function ApplyProposal() {
 
       }
 
-      alert("Application Submitted Successfully!")
+      toast.success("Application Submitted Successfully!")
 
       navigate("/proposal-success")
 
@@ -56,7 +57,7 @@ export default function ApplyProposal() {
 
       console.error(error)
 
-      alert("Failed to submit proposal")
+      toast.error("Failed to submit proposal")
 
     }
 

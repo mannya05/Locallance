@@ -1,6 +1,7 @@
 import Navbar from "../components/navbar"
 import { useNavigate, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
+import toast from "react-hot-toast"
 import API from "../api/api"
 
 export default function EditGig() {
@@ -58,7 +59,7 @@ export default function EditGig() {
         user: currentUser.name
       })
 
-      alert("Gig updated successfully!")
+      toast.success("Gig updated successfully!")
 
       navigate("/dashboard")
 
@@ -107,15 +108,30 @@ export default function EditGig() {
               Category
             </label>
 
-            <input
-              type="text"
-              value={category}
-              onChange={(e) =>
-                setCategory(e.target.value)
-              }
-              className="w-full bg-black border border-gray-700 rounded-xl p-4"
-            />
+                  <select
+                  value={category}
+                  onChange={(e) =>
+                    setCategory(e.target.value)
+                  }
+                  className="w-full bg-black border border-gray-700 rounded-xl p-4"
+                >
 
+                  <option value="">
+                    Select Category
+                  </option>
+
+                  {categories.map((cat) => (
+
+                    <option
+                      key={cat}
+                      value={cat}
+                    >
+                      {cat}
+                    </option>
+
+                  ))}
+
+                </select>
           </div>
 
           <div className="mb-6">

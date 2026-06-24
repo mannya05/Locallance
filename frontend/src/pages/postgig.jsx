@@ -1,10 +1,22 @@
 import Navbar from "../components/navbar"
 import { useNavigate } from "react-router-dom"
+import toast from "react-hot-toast"
 import { useState } from "react"
 import API from "../api/api"
 
 export default function PostGig() {
-
+  const categories = [
+  "Web Development",
+  "UI/UX Design",
+  "Graphic Design",
+  "Video Editing",
+  "Content Writing",
+  "Tutoring",
+  "AI/ML",
+  "Data Science",
+  "Mobile App Development",
+  "Other"
+]
   const navigate = useNavigate()
 
   const [title, setTitle] = useState("")
@@ -25,7 +37,7 @@ export default function PostGig() {
         user: user.name
       })
 
-      alert("✅ Gig Posted Successfully!")
+      toast.success("Gig Posted Successfully!")
 
       navigate("/dashboard")
 
@@ -33,7 +45,7 @@ export default function PostGig() {
 
       console.error(error)
 
-      alert("❌ Failed to post gig")
+      toast.error("Failed to post gig")
     }
   }
 
@@ -83,11 +95,20 @@ export default function PostGig() {
               onChange={(e) => setCategory(e.target.value)}
               className="w-full bg-black border border-gray-700 rounded-xl p-4"
             >
-              <option>Design</option>
-              <option>Development</option>
-              <option>Presentation</option>
-              <option>Video Editing</option>
-              <option>Tutoring</option>
+                <option value="">
+                  Select Category
+                </option>
+
+                {categories.map((cat) => (
+
+                  <option
+                    key={cat}
+                    value={cat}
+                  >
+                    {cat}
+                  </option>
+
+                ))}
             </select>
 
           </div>

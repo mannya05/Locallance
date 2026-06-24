@@ -1,5 +1,6 @@
 import Navbar from "../components/navbar"
 import { Link, useNavigate } from "react-router-dom"
+import toast from "react-hot-toast"
 import { useState } from "react"
 import API from "../api/api"
 
@@ -51,7 +52,7 @@ export default function Register() {
         )
       )
 
-      alert("Registration Successful!")
+      toast.success("Registration Successful!")
 
       navigate("/dashboard")
 
@@ -59,7 +60,7 @@ export default function Register() {
 
     else {
 
-      alert(
+      toast.success(
         registerResponse.data.message
       )
 
@@ -71,7 +72,7 @@ export default function Register() {
 
     console.error(error)
 
-    alert("Registration failed")
+    toast.error("Registration failed")
 
   }
 

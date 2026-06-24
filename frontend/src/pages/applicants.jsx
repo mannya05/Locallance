@@ -1,6 +1,7 @@
 import Navbar from "../components/navbar"
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
+import toast from "react-hot-toast"
 import API from "../api/api"
 
 export default function Applicants() {
@@ -53,13 +54,13 @@ export default function Applicants() {
 
       await fetchApplications()
 
-      alert(`${status} Successfully!`)
+      toast.success(`${status} Successfully!`)
 
     } catch (error) {
 
       console.error(error)
 
-      alert("Failed to update status")
+      toast.error("Failed to update status")
 
     }
 
@@ -89,13 +90,13 @@ export default function Applicants() {
 
       await fetchApplications()
 
-      alert("Feedback Saved Successfully!")
+      toast.success("Feedback Saved Successfully!")
 
     } catch (error) {
 
       console.error(error)
 
-      alert("Failed to save feedback")
+      toast.error("Failed to save feedback")
 
     }
 

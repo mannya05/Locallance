@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import toast from "react-hot-toast"
 import API from "../api/api"
 import Navbar from "../components/navbar"
 
@@ -25,7 +26,7 @@ export default function ForgotPassword() {
         }
       )
 
-      alert("Password updated successfully!")
+      toast.success("Password updated successfully!")
 
       navigate("/login")
 
@@ -35,7 +36,7 @@ export default function ForgotPassword() {
 
       console.error(error)
 
-      alert("Failed to reset password")
+      toast.success("Failed to reset password")
 
     }
 

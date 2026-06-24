@@ -1,5 +1,6 @@
 import Navbar from "../components/navbar"
 import { Link, useNavigate } from "react-router-dom"
+import toast from "react-hot-toast"
 import { useState } from "react"
 import API from "../api/api"
 
@@ -38,7 +39,7 @@ const handleLogin = async (e) => {
         JSON.stringify(response.data.user)
       )
 
-      alert("Login Successful!")
+      toast.success("Login Successful!")
 
       navigate("/dashboard")
 
@@ -46,7 +47,7 @@ const handleLogin = async (e) => {
 
     else {
 
-      alert(response.data.message)
+      toast.success(response.data.message)
 
     }
 
@@ -56,7 +57,7 @@ const handleLogin = async (e) => {
 
     console.error(error)
 
-    alert("Login Failed")
+    toast.error("Login Failed")
 
   }
 
