@@ -1,6 +1,23 @@
 # 🚀 LocalLance
 
-A campus-focused freelance marketplace that connects students with local opportunities. Users can post gigs, apply for projects, rank applicants using AI, manage applications, and collaborate efficiently.
+A campus-focused AI-powered freelance marketplace for college students.
+
+[![Live Demo](https://img.shields.io/badge/Live-Demo-green)](locallancefrontend-kdby3h8mr-mannyas-projects.vercel.app)
+[![Backend](https://img.shields.io/badge/Backend-Render-blue)](https://locallance-backend.onrender.com)
+
+## 🌐 Live Demo
+**Frontend:** https://locallancefrontend.vercel.app  
+**Backend API:** https://locallance-backend.onrender.com/docs
+
+> ⚠️ First load may take 30 seconds — free tier spins down when idle.
+
+## 📸 Screenshots
+### Home Page
+<img width="1913" height="781" alt="image" src="https://github.com/user-attachments/assets/707552ab-b369-417b-ba01-52ff90ae1d07" />
+### Dashboard
+<img width="1909" height="906" alt="image" src="https://github.com/user-attachments/assets/dea5f799-a03a-4076-a373-af896c5e65bc" />
+### Browse gigs
+<img width="1919" height="875" alt="image" src="https://github.com/user-attachments/assets/1c9f2267-3f2a-43c9-ae96-0255a068b3b9" />
 
 ---
 
@@ -167,6 +184,5 @@ npm run dev
 
 ## 👨‍💻 Author
 
-**Mannya**
-
-Built as a full-stack AI-powered freelance marketplace project using React, FastAPI, SQLite, and Generative AI.
+**Mannya** — 4th year CS student at Thapar Institute of Engineering & Technology  
+Built as a full-stack AI-powered project using React, FastAPI, and Generative AI.
