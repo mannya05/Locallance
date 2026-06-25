@@ -2,11 +2,11 @@
 
 A campus-focused AI-powered freelance marketplace for college students.
 
-[![Live Demo](https://img.shields.io/badge/Live-Demo-green)](locallancefrontend-kdby3h8mr-mannyas-projects.vercel.app)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-green)](locallancefrontend-jgvacwlwc-mannyas-projects.vercel.app)
 [![Backend](https://img.shields.io/badge/Backend-Render-blue)](https://locallance-backend.onrender.com)
 
 ## 🌐 Live Demo
-**Frontend:** https://locallancefrontend.vercel.app  
+**Frontend:** locallancefrontend-jgvacwlwc-mannyas-projects.vercel.app
 **Backend API:** https://locallance-backend.onrender.com/docs
 
 > ⚠️ First load may take 30 seconds — free tier spins down when idle.
