@@ -104,7 +104,7 @@ A campus-focused AI-powered freelance marketplace for college students.
 
 ### AI Layer
 
-* Gemini API / LLM Integration
+* OpenRouter API / LLM Integration
 * AI-based Applicant Ranking
 
 ---
